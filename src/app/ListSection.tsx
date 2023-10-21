@@ -67,11 +67,16 @@ export const ListSection = () => {
 
   return (
     <VStack>
-      <List width={'80%'}>
+      <List width={"80%"}>
         {shoppingList.map((l) => {
           return (
-            <ListItem margin={2} border={"1px solid black"} padding={2} borderRadius={8}>
-              <HStack justifyContent={'space-between'}>
+            <ListItem
+              margin={2}
+              border={"1px solid black"}
+              padding={2}
+              borderRadius={8}
+            >
+              <HStack justifyContent={"space-between"}>
                 <Box>{PrettifyForList(l)}</Box>
                 <IconButton
                   variant={"ghost"}
@@ -89,6 +94,9 @@ export const ListSection = () => {
         value={textInputValue}
         onInput={(e) => {
           setTextInputValue((e.target as HTMLInputElement).value);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") handleSubmit();
         }}
       ></Input>
       <Button onClick={handleSubmit}>Legg til!</Button>
