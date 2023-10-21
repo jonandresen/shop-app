@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IAMGE_TAG: shop-app:$(date +%s)
+  IMAGE_TAG: shop-app:$(date +%s)
 
 jobs:
   build:
