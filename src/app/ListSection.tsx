@@ -16,6 +16,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { PrettifyForList } from "./utils/textUtils";
 
 const LIST_DATA_LS_KEY = "LIST_DATA_LS_KEY";
 
@@ -66,12 +67,12 @@ export const ListSection = () => {
 
   return (
     <VStack>
-      <List>
+      <List width={'80%'}>
         {shoppingList.map((l) => {
           return (
-            <ListItem>
-              <HStack>
-                <Box>{l}</Box>
+            <ListItem margin={2} border={"1px solid black"} padding={2} borderRadius={8}>
+              <HStack justifyContent={'space-between'}>
+                <Box>{PrettifyForList(l)}</Box>
                 <IconButton
                   variant={"ghost"}
                   icon={<AiOutlineCloseCircle />}
