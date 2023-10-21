@@ -14,12 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE_TAG
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE_TAG }}
 
     - name: Log in to GitHub Packages
       run: echo ${{ secrets.SHOP_APP_PAT }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
 
     - name: Push Docker image to GitHub Packages
       run: |
-        docker tag $IMAGE_TAG docker.pkg.github.com/${{ github.repository }}/$IMAGE_TAG
-        docker push docker.pkg.github.com/${{ github.repository }}/$IMAGE_TAG
+        docker tag ${{ env.IMAGE_TAG }} docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_TAG }}
+        docker push docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_TAG }}
