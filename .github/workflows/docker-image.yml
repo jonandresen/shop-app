@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_TAG: shop-app
-  #:$(date +%s) boi
+  #:$(date +%s) boig
 
 jobs:
   build:
@@ -22,9 +22,9 @@ jobs:
       run: docker build . --file Dockerfile --tag ${{ env.IMAGE_TAG }}
 
     - name: Log in to GitHub Packages
-      run: echo ${{ secrets.SHOP_APP_PAT }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+      run: echo ${{ secrets.SHOP_APP_PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
     - name: Push Docker image to GitHub Packages
       run: |
-        docker tag ${{ env.IMAGE_TAG }} docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_TAG }}
-        docker push docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_TAG }}
+        docker tag ${{ env.IMAGE_TAG }} ghcr.io/${{ github.repository }}/${{ env.IMAGE_TAG }}
+        docker push ghcr.io/${{ github.repository }}/${{ env.IMAGE_TAG }}
