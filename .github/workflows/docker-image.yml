@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_TAG: shop-app
-  #:$(date +%s)
+  #:$(date +%s) boi
 
 jobs:
   build:
