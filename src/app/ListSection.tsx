@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   List,
@@ -8,6 +8,7 @@ import {
   UnorderedList,
   Button,
   Input,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -17,19 +18,15 @@ export const ListSection = () => {
   const [shoppingList, setShoppingList] = useState<string[]>([]);
 
   const handleSubmit = () => {
-    setShoppingList([textInputValue, ...shoppingList]);
+    setShoppingList([...new Set([textInputValue, ...shoppingList])]);
     setTextInputValue("");
   };
 
   return (
-    <>
+    <VStack>
       <List>
-        {shoppingList.map(l => {
-            return (
-            <ListItem>
-                {l}
-            </ListItem>
-            )
+        {shoppingList.map((l) => {
+          return <ListItem>{l}</ListItem>;
         })}
       </List>
 
@@ -40,6 +37,6 @@ export const ListSection = () => {
         }}
       ></Input>
       <Button onClick={handleSubmit}>Legg til!</Button>
-    </>
+    </VStack>
   );
 };
