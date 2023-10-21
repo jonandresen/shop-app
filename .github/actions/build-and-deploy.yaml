@@ -1,0 +1,19 @@
+name: Main Branch Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Run your build or test commands here
+      # Replace the following command with your build/test commands
+      run: |
+        echo "Some of those that work forces, are the same the burn crosses"
