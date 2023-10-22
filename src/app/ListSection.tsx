@@ -17,34 +17,29 @@ import React from "react";
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { PrettifyForList } from "./utils/textUtils";
+import {
+  getLocalStorageValue,
+  setLocalStorageValue,
+} from "./utils/localStorage";
 
 const LIST_DATA_LS_KEY = "LIST_DATA_LS_KEY";
 
 export const ListSection = () => {
-  const initialData = localStorage.getItem(LIST_DATA_LS_KEY);
+  const initialData = getLocalStorageValue(LIST_DATA_LS_KEY);
   const [textInputValue, setTextInputValue] = useState("");
   const [shoppingList, setShoppingList] = useState<string[]>(
     initialData ? JSON.parse(initialData) : []
   );
 
   const addToList = (listValue: string) => {
-    localStorage.setItem(
+    setLocalStorageValue(
       LIST_DATA_LS_KEY,
       JSON.stringify([
         ...new Set([listValue.toLocaleUpperCase(), ...shoppingList]),
       ])
     );
-    const localData = localStorage.getItem(LIST_DATA_LS_KEY);
+    const localData = getLocalStorageValue(LIST_DATA_LS_KEY);
     setShoppingList(localData ? JSON.parse(localData) : []);
-  };
-
-  const valueIsStored = (value: string): boolean => {
-    const storedData = localStorage.getItem(LIST_DATA_LS_KEY);
-    if (storedData === null) return false;
-    const parsedData = JSON.parse(storedData) as string[];
-    return !!parsedData.find(
-      (i) => i.toLocaleUpperCase() === value.toLocaleUpperCase()
-    );
   };
 
   const handleSubmit = () => {
@@ -53,7 +48,7 @@ export const ListSection = () => {
   };
 
   const handleRemoveButton = (item: string) => {
-    localStorage.setItem(
+    setLocalStorageValue(
       LIST_DATA_LS_KEY,
       JSON.stringify([
         ...shoppingList.filter(
@@ -61,7 +56,7 @@ export const ListSection = () => {
         ),
       ])
     );
-    const localData = localStorage.getItem(LIST_DATA_LS_KEY);
+    const localData = getLocalStorageValue(LIST_DATA_LS_KEY);
     setShoppingList(localData ? JSON.parse(localData) : []);
   };
 
